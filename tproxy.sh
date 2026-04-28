@@ -772,7 +772,7 @@ setup_cn_ipset() {
         ipv4_count=$(wc -l < "$CONFIG_DIR/$CN_IP_FILE" 2> /dev/null || echo "0")
 
         log Debug "[EXEC] ipset create cnip hash:net family inet hashsize 8192 maxelem 65536"
-        log Debug "[EXEC] Generating temporary ipset restore file with $ipv4_count entries（生成含 $ipv4_count 条记录的临时 ipset 恢复文件）"
+        log Debug "[EXEC] 正在生成含 $ipv4_count 条记录的临时 ipset 恢复文件"
 
         if [ "$DRY_RUN" -eq 0 ]; then
             temp_file=$(mktemp) || {
@@ -788,7 +788,7 @@ setup_cn_ipset() {
                 return 1
             }
         else
-            log Debug "[EXEC] Would create temporary file and add $ipv4_count entries to cnip（将创建临时文件并添加 $ipv4_count 条记录到 cnip）"
+            log Debug "[EXEC] 将创建临时文件并添加 $ipv4_count 条记录到 cnip"
         fi
 
         log Debug "[EXEC] ipset restore -f \"$temp_file\""
@@ -804,7 +804,7 @@ setup_cn_ipset() {
             log Debug "[EXEC] rm -f $temp_file"
             rm -f "$temp_file"
         else
-            log Debug "[EXEC] Would load $ipv4_count IPv4 CIDR entries via ipset restore（将通过 ipset restore 加载 $ipv4_count 条 IPv4 CIDR 记录）"
+            log Debug "[EXEC] 将通过 ipset restore 加载 $ipv4_count 条 IPv4 CIDR 记录"
         fi
 
     else
@@ -820,7 +820,7 @@ setup_cn_ipset() {
             ipv6_count=$(wc -l < "$CONFIG_DIR/$CN_IPV6_FILE" 2> /dev/null || echo "0")
 
             log Debug "[EXEC] ipset create cnip6 hash:net family inet6 hashsize 8192 maxelem 65536"
-            log Debug "[EXEC] Generating temporary ipset restore file with $ipv6_count entries（生成含 $ipv6_count 条记录的临时 ipset 恢复文件）"
+            log Debug "[EXEC] 正在生成含 $ipv6_count 条记录的临时 ipset 恢复文件"
 
             if [ "$DRY_RUN" -eq 0 ]; then
                 temp_file6=$(mktemp) || {
@@ -836,7 +836,7 @@ setup_cn_ipset() {
                     return 1
                 }
             else
-                log Debug "[EXEC] Would create temporary file and add $ipv6_count entries to cnip6（将创建临时文件并添加 $ipv6_count 条记录到 cnip6）"
+                log Debug "[EXEC] 将创建临时文件并添加 $ipv6_count 条记录到 cnip6"
             fi
 
             log Debug "[EXEC] ipset restore -f \"$temp_file6\""
@@ -852,7 +852,7 @@ setup_cn_ipset() {
                 log Debug "[EXEC] rm -f $temp_file6"
                 rm -f "$temp_file6"
             else
-                log Debug "[EXEC] Would load $ipv6_count IPv6 CIDR entries via ipset restore（将通过 ipset restore 加载 $ipv6_count 条 IPv6 CIDR 记录）"
+                log Debug "[EXEC] 将通过 ipset restore 加载 $ipv6_count 条 IPv6 CIDR 记录"
             fi
 
         else
